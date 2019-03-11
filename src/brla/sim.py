@@ -34,17 +34,15 @@ def main():
     Nrange = np.array(range(N+1))
 
     for i in range(NumberErrorValues):
-        kprev[i, 1] = 0
+        kprev[i, 0] = 1
         for j in range(m):
-            k = 0 # TODO: Check this
-            ThisError = 0.0 # TODO: Check this
             hyp = stats.hypergeom(N, Nrange, n[j])
-            for k in range(kprev[i, j], n[j]):
+            for k in range(kprev[i, j], n[j]+1):
                 # first time: hygepdf(k,N,0:1:N,n(j)) [:15] == 0.00000 0.00003 0.00006 0.00008 0.00011 0.00014 0.00017 0.00020 0.00023 0.00025 0.00028 0.00031 0.00034 0.00037
                 hyppmf = hyp.pmf(k)
                 BayesPosteriorDist = BayesianPrior * hyppmf  # . * hygepdf(k, N, 0:1:N, n[j])
                 BayesPosteriorDist = BayesPosteriorDist / BayesPosteriorDist.sum()
-                ThisError = sum(BayesPosteriorDist[:HalfN])
+                ThisError = sum(BayesPosteriorDist[:HalfN+1])
                 print("i: %d, j: %d, k: %d, e: %f, hyppmf: %s BPD: %s" % (i, j, k, ThisError, hyppmf, BayesPosteriorDist))
                 if ThisError <= BayesianError[i]:
                     break
@@ -58,7 +56,7 @@ def main():
                 if kmin[i, j] == n[j]:
                     kmin[i, j] = 0
                     Error[i, j] = 0
-    print("kprev: %s\nkmin: %s\nerror: %s" % (kprev, kmin, Error))
+    print("n: %s\nNrange: %s\nkprev: %s\nkmin: %s\nerror: %s" % (n, Nrange, kprev, kmin, Error))
 
 
 if __name__ == "__main__":
