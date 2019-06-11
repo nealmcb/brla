@@ -19,7 +19,7 @@ def main():
     n = [25, 50, 100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600, 51200]
     m = len(n)
 
-    BayesianError = (0.05, 0.005, 0.1)
+    BayesianError = (0.1, 0.05, 0.005)
     NumberErrorValues = len(BayesianError)
 
     HalfN = math.floor(N / 2)

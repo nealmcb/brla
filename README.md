@@ -7,3 +7,5 @@ Based on
 by Poorvi Vora.
 
 A Python re-implementation of MATLAB code in BayesianWithPriorFiner.m also by Poorvi Vora.
+
+See the results in [Table 3](notebooks/3.0-table-3.ipynb) to begin.
